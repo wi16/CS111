@@ -1,0 +1,15 @@
+public class PigLatin {
+public static String translate(String original) {
+if (original.charAt(0)=='a'||original.charAt(0)=='A'||original.charAt(0)=='e'||original.charAt(0)=='E'||original.charAt(0)=='i'||original.charAt(0)=='I'||original.charAt(0)=='o'||original.charAt(0)=='O'||original.charAt(0)=='u'||original.charAt(0)=='U'){
+return original + "vai";
+}
+else {
+return original.substring(1)+original.charAt(0)+"ai";
+}
+}
+public static void main(String[] args) { 
+System.out.println("Enter a string: ");
+String input = IO.readString();
+System.out.println("Pig Latin translated word: " + translate(input));
+}
+}
