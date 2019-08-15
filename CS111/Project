@@ -1,0 +1,137 @@
+public class Project {
+ 
+public static void printMatrix(double[][] matrix) {
+for (int row = 0 ; row < matrix.length ; row++) {
+for (int col = 0 ; col < matrix[0].length ; col++) {
+System.out.print(matrix[row][col] + "\t");
+}
+System.out.println();
+}
+}
+ 
+public static double[][] multiply(double[][] matrix1, double[][] matrix2) {
+double sum = 0;
+double[][] product = new double[matrix1.length][matrix2[0].length];
+if (matrix1[0].length != matrix2.length) {
+return null;
+}
+for (int i = 0; i < matrix1.length; i++) {
+for (int j = 0; j < matrix1[0].length; j++) {
+for (int k = 0; k < matrix2.length ; k++) {
+sum += (matrix1[i][k]*matrix2[k][j]);
+}  
+product[i][j] = sum;
+sum = 0;
+}
+}
+return product;  
+}
+ 
+public static double[][] Transpose(double[][] matrix3) {
+double [][] matrix31 = new double [matrix3.length][matrix3.length];
+for (int i = 0; i < matrix3.length; i++) {
+for (int j = 0 ; j < matrix3[0].length ; j++) {
+matrix31[i][j] = matrix3[j][i];
+}
+}
+return matrix31;
+}
+ 
+public static double Determinant(double[][] matrix4) {
+double temp[][];
+double result = 0;
+if (matrix4.length == 1) {
+result = matrix4[0][0];
+return result;
+}
+if (matrix4.length == 2) {
+result = ((matrix4[0][0] * matrix4[1][1]) - (matrix4[0][1] * matrix4[1][0]));
+return result;
+}
+for (int i = 0; i < matrix4[0].length; i++) {
+temp = new double[matrix4.length - 1][matrix4[0].length - 1];
+for (int j = 1; j < matrix4.length; j++) {
+for (int k = 0; k < matrix4[0].length; k++) {
+if (k < i) {
+temp[j - 1][k] = matrix4[j][k];
+} else if (k > i) {
+temp[j - 1][k - 1] = matrix4[j][k];
+}
+}
+}
+result += (matrix4[0][i] * Math.pow (-1, (double)i) * Determinant(temp));
+}
+return result;
+}
+ 
+public static double[][] Inverse(double matrix5[][], int n) {
+for (int i = 0; i < n; i++) {
+for (int j = 0; j < n; j++) {
+if (i != j) {
+double p = matrix5[j][i] / matrix5[i][i];
+for (int k = 0; k < 2*n; k++)                  
+matrix5[j][k] -= ((matrix5[i][k]) * p);            
+}
+}
+}
+for (int i = 0; i < n; i++) {
+double divide = matrix5[i][i];
+for (int j = 0; j < 2*n; j++) {
+matrix5[i][j] = matrix5[i][j]/divide;
+}
+}  
+double [][] matrix51 = new double [n][n];
+for (int i = 0; i < n; i++) {
+for (int j = 0; j < n; j++) {
+matrix51[i][j] = matrix5[i][j+n];  
+}
+}  
+return matrix51;
+}
+ 
+public static void main(String[] args) {
+int n = IO.readInt();
+while (n <= 0) {
+n = IO.readInt();
+}
+double[][] a = new double [n][n];
+for (int x = 0; x < n; x++) {
+for (int y = 0; y < n; y++) {
+a[x][y] = IO.readInt();
+}
+}
+double[][] k = new double [n][2*n];
+double[][] identity = new double [n][n];
+for (int i = 0; i < n; i++) {
+for (int j = 0; j < n; j++) {
+if (i == j) {
+identity[i][j] = 1;
+} else {
+identity[i][j] = 0;
+}
+}
+}
+for (int i = 0; i < n; i++) {
+for (int j = 0; j < 2*n; j++) {
+for (int z = 0; z < n; z++) {
+for (int y = 0; y < n; y++) {
+k[z][y] = a[z][y];
+}
+}
+for (int v = 0; v < n; v++) {
+for (int w = 0; w < n; w++) {
+k[v][w+n] = identity[v][w];
+}
+}
+}
+}
+double[][] c = Transpose(a);
+printMatrix(c);
+double[][] d = Inverse(k, n);
+if (Determinant(a) == 0) {
+System.out.println("no inverse available");
+} else {
+printMatrix(d);
+}
+}
+}
