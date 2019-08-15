@@ -1,0 +1,32 @@
+public class PayFriend {
+public static double max( double x , double y ) 
+{ if  ( x>= y )
+return x; 
+else 
+return y;
+}
+public static void main (String [] args) {
+double a = IO.readDouble();
+double b;
+if  ( a < 100 ){
+System.out.println(5);
+}
+else if  ( a > 100 && a < 1000 ){
+IO.outputDoubleAnswer(max( 6 , (a*3)/100));
+}
+else if ( a <= 1000 && a < 10000){
+IO.outputDoubleAnswer(max( 15, a/100));
+}
+else if (a >= 10000) { 
+if ( a < 15000 ){
+IO.outputDoubleAnswer(a/100);
+}
+else if  ( a >= 15000 && a < 20000 ){
+IO.outputDoubleAnswer(100 +((a-10000)*2/100));
+}
+else if  (a >= 20000){
+IO.outputDoubleAnswer(200 + ((a-15000)*3/100));
+}
+}
+}
+}
