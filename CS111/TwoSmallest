@@ -1,0 +1,45 @@
+public class TwoSmallest{
+public static void main(String[] args){
+double term = IO.readDouble();
+double s1=IO.readDouble();
+double s2=IO.readDouble();
+while (s1 == term || s2 == term) {
+if (s1 == term) {
+s1 = IO.readDouble();
+} else if (s2 == term) { 
+s2=IO.readDouble();
+}
+continue;
+}
+double small = Double.MAX_VALUE;
+double smallest = Double.MAX_VALUE;
+if (s1 > s2) {
+small = s1;
+smallest = s2;
+} else if (s1 <    s2)    {
+smallest = s1;
+small = s2;
+} else {
+smallest = s1;
+small = s2;
+}
+double input = IO.readDouble();
+while (input != term) {
+if (input < small) {
+if (input < smallest) {
+small = smallest;
+smallest = input;
+} 
+else if (input > smallest) {
+small = input ;
+}   
+else if (input == smallest) {
+small = smallest;
+}
+}
+input = IO.readDouble();
+}
+IO.outputDoubleAnswer(smallest);
+IO.outputDoubleAnswer(small);
+}
+}
