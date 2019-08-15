@@ -1,0 +1,15 @@
+public class Party {
+public static void main (String [] args) {
+int a = IO.readInt();
+int b = IO.readInt();
+int c = IO.readInt();
+double d = IO.readDouble();
+int e = IO.readInt();
+double f = IO.readDouble();
+int g = IO.readInt();
+double h = Math.ceil(((a*b)/e)+1)*d;
+double i = Math.ceil(((a*c)/g)+1)*f;
+double total = (double) h + i;
+IO.outputDoubleAnswer(total);
+}
+}
